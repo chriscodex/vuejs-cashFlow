@@ -1,10 +1,9 @@
-<script setup lang='ts'>
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div>
-    
+  <div class="splashscreen">
+    <img src="@/assets/cashflow-icon.svg" alt="logo" />
+    <h1><span>Cash</span>Flow</h1>
   </div>
 </template>
 
