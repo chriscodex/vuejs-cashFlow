@@ -24,7 +24,7 @@ const Home = defineAsyncComponent(async () => {
   </Suspense>
 </template>
 
-<style scoped>
+<style>
 html,
 body,
 .app {
