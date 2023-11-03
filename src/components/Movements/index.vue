@@ -5,6 +5,8 @@ import Movement from './Movement.vue';
 interface MovementData {
   id: number;
   title: string;
+  description: string;
+  amount: number;
 }
 
 const props = defineProps({
@@ -15,6 +17,10 @@ const props = defineProps({
 });
 
 const { movements } = toRefs(props);
+
+const remove = (id: number) => {
+  console.log('remove', id);
+};
 </script>
 
 <template>
@@ -22,9 +28,13 @@ const { movements } = toRefs(props);
     <h2 class="title">Historial</h2>
     <div class="content">
       <Movement
-        v-for="movement in movements"
-        :key="movement.id"
-        :title="movement.title"
+        v-for="{ id, title, description, amount } in movements"
+        :key="id"
+        :id="id"
+        :title="title"
+        :description="description"
+        :amount="amount"
+        @remove="remove"
       />
     </div>
   </div>
