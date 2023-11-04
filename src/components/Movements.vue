@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="movements">
     Movements
   </div>
 </template>
