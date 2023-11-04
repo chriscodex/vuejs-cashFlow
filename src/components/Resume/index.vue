@@ -1,22 +1,65 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, computed } from 'vue';
 
 const props = defineProps({
+  totalLabel: {
+    type: String,
+    default: null,
+  },
   label: String,
   amount: Number,
+  totalAmount: {
+    type: Number,
+    default: null,
+  },
 });
 
-const { label, amount } = props;
+const { totalLabel, label, amount, totalAmount } = props;
+
+const amountVisual = computed(() => {
+  if (totalAmount) {
+    return totalAmount;
+  } else {
+    return amount;
+  }
+});
+
+const labelVisual = computed(() => {
+  if (totalLabel) {
+    return totalLabel;
+  } else {
+    return label;
+  }
+});
+
+const currencyFormatter = new Intl.NumberFormat('es-PE', {
+  style: 'currency',
+  currency: 'PEN',
+});
+
+const amountCurrency = computed(() => {
+  if (
+    typeof amountVisual.value === 'number' ||
+    typeof amountVisual.value === 'bigint'
+  )
+    return currencyFormatter.format(amountVisual.value);
+});
 </script>
 
 <template>
   <main>
     <p>
-      {{ label }}
+      {{ labelVisual }}
     </p>
     <h1>
-      {{ amount }}
+      {{ amountCurrency }}
     </h1>
+    <div class="graphic">
+      <slot name="graphic"></slot>
+    </div>
+    <div class="action">
+      <slot name="action"></slot>
+    </div>
   </main>
 </template>
 
