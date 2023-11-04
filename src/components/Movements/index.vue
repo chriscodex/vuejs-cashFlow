@@ -1,7 +1,33 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { defineProps, toRefs } from 'vue';
+import Movement from './Movement.vue';
+
+interface MovementData {
+  id: number;
+  title: string;
+}
+
+const props = defineProps({
+  movements: {
+    type: Array as () => MovementData[],
+    default: () => [],
+  },
+});
+
+const { movements } = toRefs(props);
+</script>
 
 <template>
-  <div></div>
+  <div class="movements">
+    <h2 class="title">Historial</h2>
+    <div class="content">
+      <Movement
+        v-for="movement in movements"
+        :key="movement.id"
+        :title="movement.title"
+      />
+    </div>
+  </div>
 </template>
 
 <style scoped>
